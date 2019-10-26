@@ -10,6 +10,7 @@ library(magick)
 library(dplyr)
 library(ggrepel)
 library(matrixStats)
+require(tibble)
 
 data_ma_bl1 <- read.csv("CWDsurveillanceMO_bl1.csv", header = TRUE)  #model application scenario baseline 1
 as_tibble(data_ma_bl1)
@@ -19,7 +20,7 @@ mabl1dp <- add_column(mabl1dp, samplesize = mabl1dp$AdultMaleTested + mabl1dp$Ad
 mabl1dp <- add_column(mabl1dp, mrun = 1:1000)
 mabl1dp$mrun <- ifelse(mabl1dp$mrun %% 100 == 0, 1, 0)
 mabl1dp <- subset(mabl1dp, mrun == 1)
-meanmabl1dp <- by(data_ma_bl1$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl1dp <- by(data_ma_bl1$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl1), 100, nrow(data_ma_bl1)))), 
                   FUN = function(x) colMeans(as.matrix(x)))
 mabl1dp <- add_column(mabl1dp, meandp = meanmabl1dp)
 mabl1dp_final <- mabl1dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -36,7 +37,7 @@ mabl2dp <- add_column(mabl2dp, samplesize = mabl2dp$AdultMaleTested + mabl2dp$Ad
 mabl2dp <- add_column(mabl2dp, mrun = 1:1000)
 mabl2dp$mrun <- ifelse(mabl2dp$mrun %% 100 == 0, 1, 0)
 mabl2dp <- subset(mabl2dp, mrun == 1)
-meanmabl2dp <- by(data_ma_bl2$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl2dp <- by(data_ma_bl2$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl2), 100, nrow(data_ma_bl2)))), 
                   FUN = function(x) colMeans(as.matrix(x)))
 mabl2dp <- add_column(mabl2dp, meandp = meanmabl2dp)
 mabl2dp_final <- mabl2dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -53,7 +54,7 @@ mabl3dp <- add_column(mabl3dp, samplesize = mabl3dp$AdultMaleTested + mabl3dp$Ad
 mabl3dp <- add_column(mabl3dp, mrun = 1:1000)
 mabl3dp$mrun <- ifelse(mabl3dp$mrun %% 100 == 0, 1, 0)
 mabl3dp <- subset(mabl3dp, mrun == 1)
-meanmabl3dp <- by(data_ma_bl3$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl3dp <- by(data_ma_bl3$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl3), 100, nrow(data_ma_bl3)))), 
                   FUN = function(x) colMeans(as.matrix(x)))
 mabl3dp <- add_column(mabl3dp, meandp = meanmabl3dp)
 mabl3dp_final <- mabl3dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -70,7 +71,7 @@ mabl4dp <- add_column(mabl4dp, samplesize = mabl4dp$AdultMaleTested + mabl4dp$Ad
 mabl4dp <- add_column(mabl4dp, mrun = 1:1000)
 mabl4dp$mrun <- ifelse(mabl4dp$mrun %% 100 == 0, 1, 0)
 mabl4dp <- subset(mabl4dp, mrun == 1)
-meanmabl4dp <- by(data_ma_bl4$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl4dp <- by(data_ma_bl4$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl4), 100, nrow(data_ma_bl4)))), 
                   FUN = function(x) colMeans(as.matrix(x)))
 mabl4dp <- add_column(mabl4dp, meandp = meanmabl4dp)
 mabl4dp_final <- mabl4dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -87,7 +88,7 @@ mabl5dp <- add_column(mabl5dp, samplesize = mabl5dp$AdultMaleTested + mabl5dp$Ad
 mabl5dp <- add_column(mabl5dp, mrun = 1:1000)
 mabl5dp$mrun <- ifelse(mabl5dp$mrun %% 100 == 0, 1, 0)
 mabl5dp <- subset(mabl5dp, mrun == 1)
-meanmabl5dp <- by(data_ma_bl5$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl5dp <- by(data_ma_bl5$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl5), 100, nrow(data_ma_bl5)))), 
                   FUN = function(x) colMeans(as.matrix(x)))
 mabl5dp <- add_column(mabl5dp, meandp = meanmabl5dp)
 mabl5dp_final <- mabl5dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -104,7 +105,7 @@ mabl6dp <- add_column(mabl6dp, samplesize = mabl6dp$AdultMaleTested + mabl6dp$Ad
 mabl6dp <- add_column(mabl6dp, mrun = 1:1000)
 mabl6dp$mrun <- ifelse(mabl6dp$mrun %% 100 == 0, 1, 0)
 mabl6dp <- subset(mabl6dp, mrun == 1)
-meanmabl6dp <- by(data_ma_bl6$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl6dp <- by(data_ma_bl6$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl6), 100, nrow(data_ma_bl6)))), 
                   FUN = function(x) colMeans(as.matrix(x)))
 mabl6dp <- add_column(mabl6dp, meandp = meanmabl6dp)
 mabl6dp_final <- mabl6dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -121,7 +122,7 @@ mabl7dp <- add_column(mabl7dp, samplesize = mabl7dp$AdultMaleTested + mabl7dp$Ad
 mabl7dp <- add_column(mabl7dp, mrun = 1:1000)
 mabl7dp$mrun <- ifelse(mabl7dp$mrun %% 100 == 0, 1, 0)
 mabl7dp <- subset(mabl7dp, mrun == 1)
-meanmabl7dp <- by(data_ma_bl7$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl7dp <- by(data_ma_bl7$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl7), 100, nrow(data_ma_bl7)))), 
                   FUN = function(x) colMeans(as.matrix(x)))
 mabl7dp <- add_column(mabl7dp, meandp = meanmabl7dp)
 mabl7dp_final <- mabl7dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -138,7 +139,7 @@ mabl8dp <- add_column(mabl8dp, samplesize = mabl8dp$AdultMaleTested + mabl8dp$Ad
 mabl8dp <- add_column(mabl8dp, mrun = 1:1000)
 mabl8dp$mrun <- ifelse(mabl8dp$mrun %% 100 == 0, 1, 0)
 mabl8dp <- subset(mabl8dp, mrun == 1)
-meanmabl8dp <- by(data_ma_bl8$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl8dp <- by(data_ma_bl8$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl8), 100, nrow(data_ma_bl8)))), 
                   FUN = function(x) colMeans(as.matrix(x)))
 mabl8dp <- add_column(mabl8dp, meandp = meanmabl8dp)
 mabl8dp_final <- mabl8dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -155,7 +156,7 @@ mabl9dp <- add_column(mabl9dp, samplesize = mabl9dp$AdultMaleTested + mabl9dp$Ad
 mabl9dp <- add_column(mabl9dp, mrun = 1:1000)
 mabl9dp$mrun <- ifelse(mabl9dp$mrun %% 100 == 0, 1, 0)
 mabl9dp <- subset(mabl9dp, mrun == 1)
-meanmabl9dp <- by(data_ma_bl9$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl9dp <- by(data_ma_bl9$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl9), 100, nrow(data_ma_bl9)))), 
                   FUN = function(x) colMeans(as.matrix(x)))
 mabl9dp <- add_column(mabl9dp, meandp = meanmabl9dp)
 mabl9dp_final <- mabl9dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -172,7 +173,7 @@ mabl10dp <- add_column(mabl10dp, samplesize = mabl10dp$AdultMaleTested + mabl10d
 mabl10dp <- add_column(mabl10dp, mrun = 1:1000)
 mabl10dp$mrun <- ifelse(mabl10dp$mrun %% 100 == 0, 1, 0)
 mabl10dp <- subset(mabl10dp, mrun == 1)
-meanmabl10dp <- by(data_ma_bl10$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl10dp <- by(data_ma_bl10$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl10), 100, nrow(data_ma_bl10)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 mabl10dp <- add_column(mabl10dp, meandp = meanmabl10dp)
 mabl10dp_final <- mabl10dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -189,7 +190,7 @@ mabl11dp <- add_column(mabl11dp, samplesize = mabl11dp$AdultMaleTested + mabl11d
 mabl11dp <- add_column(mabl11dp, mrun = 1:1000)
 mabl11dp$mrun <- ifelse(mabl11dp$mrun %% 100 == 0, 1, 0)
 mabl11dp <- subset(mabl11dp, mrun == 1)
-meanmabl11dp <- by(data_ma_bl11$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl11dp <- by(data_ma_bl11$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl11), 100, nrow(data_ma_bl11)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 mabl11dp <- add_column(mabl11dp, meandp = meanmabl11dp)
 mabl11dp_final <- mabl11dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -206,7 +207,7 @@ mabl12dp <- add_column(mabl12dp, samplesize = mabl12dp$AdultMaleTested + mabl12d
 mabl12dp <- add_column(mabl12dp, mrun = 1:1000)
 mabl12dp$mrun <- ifelse(mabl12dp$mrun %% 100 == 0, 1, 0)
 mabl12dp <- subset(mabl12dp, mrun == 1)
-meanmabl12dp <- by(data_ma_bl12$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl12dp <- by(data_ma_bl12$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl12), 100, nrow(data_ma_bl12)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 mabl12dp <- add_column(mabl12dp, meandp = meanmabl12dp)
 mabl12dp_final <- mabl12dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -223,7 +224,7 @@ mabl13dp <- add_column(mabl13dp, samplesize = mabl13dp$AdultMaleTested + mabl13d
 mabl13dp <- add_column(mabl13dp, mrun = 1:1000)
 mabl13dp$mrun <- ifelse(mabl13dp$mrun %% 100 == 0, 1, 0)
 mabl13dp <- subset(mabl13dp, mrun == 1)
-meanmabl13dp <- by(data_ma_bl13$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl13dp <- by(data_ma_bl13$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl13), 100, nrow(data_ma_bl13)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 mabl13dp <- add_column(mabl13dp, meandp = meanmabl13dp)
 mabl13dp_final <- mabl13dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -240,7 +241,7 @@ mabl14dp <- add_column(mabl14dp, samplesize = mabl14dp$AdultMaleTested + mabl14d
 mabl14dp <- add_column(mabl14dp, mrun = 1:1000)
 mabl14dp$mrun <- ifelse(mabl14dp$mrun %% 100 == 0, 1, 0)
 mabl14dp <- subset(mabl14dp, mrun == 1)
-meanmabl14dp <- by(data_ma_bl14$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl14dp <- by(data_ma_bl14$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl14), 100, nrow(data_ma_bl14)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 mabl14dp <- add_column(mabl14dp, meandp = meanmabl14dp)
 mabl14dp_final <- mabl14dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -257,7 +258,7 @@ mabl15dp <- add_column(mabl15dp, samplesize = mabl15dp$AdultMaleTested + mabl15d
 mabl15dp <- add_column(mabl15dp, mrun = 1:1000)
 mabl15dp$mrun <- ifelse(mabl15dp$mrun %% 100 == 0, 1, 0)
 mabl15dp <- subset(mabl15dp, mrun == 1)
-meanmabl15dp <- by(data_ma_bl15$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl15dp <- by(data_ma_bl15$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl15), 100, nrow(data_ma_bl15)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 mabl15dp <- add_column(mabl15dp, meandp = meanmabl15dp)
 mabl15dp_final <- mabl15dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -274,7 +275,7 @@ mabl16dp <- add_column(mabl16dp, samplesize = mabl16dp$AdultMaleTested + mabl16d
 mabl16dp <- add_column(mabl16dp, mrun = 1:1000)
 mabl16dp$mrun <- ifelse(mabl16dp$mrun %% 100 == 0, 1, 0)
 mabl16dp <- subset(mabl16dp, mrun == 1)
-meanmabl16dp <- by(data_ma_bl16$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl16dp <- by(data_ma_bl16$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl16), 100, nrow(data_ma_bl16)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 mabl16dp <- add_column(mabl16dp, meandp = meanmabl16dp)
 mabl16dp_final <- mabl16dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -291,7 +292,7 @@ mabl17dp <- add_column(mabl17dp, samplesize = mabl17dp$AdultMaleTested + mabl17d
 mabl17dp <- add_column(mabl17dp, mrun = 1:1000)
 mabl17dp$mrun <- ifelse(mabl17dp$mrun %% 100 == 0, 1, 0)
 mabl17dp <- subset(mabl17dp, mrun == 1)
-meanmabl17dp <- by(data_ma_bl17$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl17dp <- by(data_ma_bl17$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl17), 100, nrow(data_ma_bl17)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 mabl17dp <- add_column(mabl17dp, meandp = meanmabl17dp)
 mabl17dp_final <- mabl17dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -308,7 +309,7 @@ mabl18dp <- add_column(mabl18dp, samplesize = mabl18dp$AdultMaleTested + mabl18d
 mabl18dp <- add_column(mabl18dp, mrun = 1:1000)
 mabl18dp$mrun <- ifelse(mabl18dp$mrun %% 100 == 0, 1, 0)
 mabl18dp <- subset(mabl18dp, mrun == 1)
-meanmabl18dp <- by(data_ma_bl18$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl18dp <- by(data_ma_bl18$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl18), 100, nrow(data_ma_bl18)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 mabl18dp <- add_column(mabl18dp, meandp = meanmabl18dp)
 mabl18dp_final <- mabl18dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -325,7 +326,7 @@ mabl19dp <- add_column(mabl19dp, samplesize = mabl19dp$AdultMaleTested + mabl19d
 mabl19dp <- add_column(mabl19dp, mrun = 1:1000)
 mabl19dp$mrun <- ifelse(mabl19dp$mrun %% 100 == 0, 1, 0)
 mabl19dp <- subset(mabl19dp, mrun == 1)
-meanmabl19dp <- by(data_ma_bl19$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl19dp <- by(data_ma_bl19$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl19), 100, nrow(data_ma_bl19)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 mabl19dp <- add_column(mabl19dp, meandp = meanmabl19dp)
 mabl19dp_final <- mabl19dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -342,7 +343,7 @@ mabl20dp <- add_column(mabl20dp, samplesize = mabl20dp$AdultMaleTested + mabl20d
 mabl20dp <- add_column(mabl20dp, mrun = 1:1000)
 mabl20dp$mrun <- ifelse(mabl20dp$mrun %% 100 == 0, 1, 0)
 mabl20dp <- subset(mabl20dp, mrun == 1)
-meanmabl20dp <- by(data_ma_bl20$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl20dp <- by(data_ma_bl20$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl20), 100, nrow(data_ma_bl20)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 mabl20dp <- add_column(mabl20dp, meandp = meanmabl20dp)
 mabl20dp_final <- mabl20dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -359,7 +360,7 @@ mabl21dp <- add_column(mabl21dp, samplesize = mabl21dp$AdultMaleTested + mabl21d
 mabl21dp <- add_column(mabl21dp, mrun = 1:1000)
 mabl21dp$mrun <- ifelse(mabl21dp$mrun %% 100 == 0, 1, 0)
 mabl21dp <- subset(mabl21dp, mrun == 1)
-meanmabl21dp <- by(data_ma_bl21$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl21dp <- by(data_ma_bl21$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl21), 100, nrow(data_ma_bl21)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 mabl21dp <- add_column(mabl21dp, meandp = meanmabl21dp)
 mabl21dp_final <- mabl21dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -376,7 +377,7 @@ mabl22dp <- add_column(mabl22dp, samplesize = mabl22dp$AdultMaleTested + mabl22d
 mabl22dp <- add_column(mabl22dp, mrun = 1:1000)
 mabl22dp$mrun <- ifelse(mabl22dp$mrun %% 100 == 0, 1, 0)
 mabl22dp <- subset(mabl22dp, mrun == 1)
-meanmabl22dp <- by(data_ma_bl22$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl22dp <- by(data_ma_bl22$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl22), 100, nrow(data_ma_bl22)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 mabl22dp <- add_column(mabl22dp, meandp = meanmabl22dp)
 mabl22dp_final <- mabl22dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -393,7 +394,7 @@ mabl23dp <- add_column(mabl23dp, samplesize = mabl23dp$AdultMaleTested + mabl23d
 mabl23dp <- add_column(mabl23dp, mrun = 1:1000)
 mabl23dp$mrun <- ifelse(mabl23dp$mrun %% 100 == 0, 1, 0)
 mabl23dp <- subset(mabl23dp, mrun == 1)
-meanmabl23dp <- by(data_ma_bl23$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl23dp <- by(data_ma_bl23$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl23), 100, nrow(data_ma_bl23)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 mabl23dp <- add_column(mabl23dp, meandp = meanmabl23dp)
 mabl23dp_final <- mabl23dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -410,7 +411,7 @@ mabl24dp <- add_column(mabl24dp, samplesize = mabl24dp$AdultMaleTested + mabl24d
 mabl24dp <- add_column(mabl24dp, mrun = 1:1000)
 mabl24dp$mrun <- ifelse(mabl24dp$mrun %% 100 == 0, 1, 0)
 mabl24dp <- subset(mabl24dp, mrun == 1)
-meanmabl24dp <- by(data_ma_bl24$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl24dp <- by(data_ma_bl24$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl24), 100, nrow(data_ma_bl24)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 mabl24dp <- add_column(mabl24dp, meandp = meanmabl24dp)
 mabl24dp_final <- mabl24dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -427,7 +428,7 @@ mabl25dp <- add_column(mabl25dp, samplesize = mabl25dp$AdultMaleTested + mabl25d
 mabl25dp <- add_column(mabl25dp, mrun = 1:1000)
 mabl25dp$mrun <- ifelse(mabl25dp$mrun %% 100 == 0, 1, 0)
 mabl25dp <- subset(mabl25dp, mrun == 1)
-meanmabl25dp <- by(data_ma_bl25$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmabl25dp <- by(data_ma_bl25$DetProb, list(gr=as.numeric(gl(nrow(data_ma_bl25), 100, nrow(data_ma_bl25)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 mabl25dp <- add_column(mabl25dp, meandp = meanmabl25dp)
 mabl25dp_final <- mabl25dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -444,7 +445,7 @@ maalt1dp <- add_column(maalt1dp, samplesize = maalt1dp$AdultMaleTested + maalt1d
 maalt1dp <- add_column(maalt1dp, mrun = 1:1000)
 maalt1dp$mrun <- ifelse(maalt1dp$mrun %% 100 == 0, 1, 0)
 maalt1dp <- subset(maalt1dp, mrun == 1)
-meanmaalt1dp <- by(data_ma_alt1$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt1dp <- by(data_ma_alt1$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt1), 100, nrow(data_ma_alt1)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 maalt1dp <- add_column(maalt1dp, meandp = meanmaalt1dp)
 maalt1dp_final <- maalt1dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -461,7 +462,7 @@ maalt2dp <- add_column(maalt2dp, samplesize = maalt2dp$AdultMaleTested + maalt2d
 maalt2dp <- add_column(maalt2dp, mrun = 1:1000)
 maalt2dp$mrun <- ifelse(maalt2dp$mrun %% 100 == 0, 1, 0)
 maalt2dp <- subset(maalt2dp, mrun == 1)
-meanmaalt2dp <- by(data_ma_alt2$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt2dp <- by(data_ma_alt2$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt2), 100, nrow(data_ma_alt2)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 maalt2dp <- add_column(maalt2dp, meandp = meanmaalt2dp)
 maalt2dp_final <- maalt2dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -478,7 +479,7 @@ maalt3dp <- add_column(maalt3dp, samplesize = maalt3dp$AdultMaleTested + maalt3d
 maalt3dp <- add_column(maalt3dp, mrun = 1:1000)
 maalt3dp$mrun <- ifelse(maalt3dp$mrun %% 100 == 0, 1, 0)
 maalt3dp <- subset(maalt3dp, mrun == 1)
-meanmaalt3dp <- by(data_ma_alt3$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt3dp <- by(data_ma_alt3$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt3), 100, nrow(data_ma_alt3)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 maalt3dp <- add_column(maalt3dp, meandp = meanmaalt3dp)
 maalt3dp_final <- maalt3dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -495,7 +496,7 @@ maalt4dp <- add_column(maalt4dp, samplesize = maalt4dp$AdultMaleTested + maalt4d
 maalt4dp <- add_column(maalt4dp, mrun = 1:1000)
 maalt4dp$mrun <- ifelse(maalt4dp$mrun %% 100 == 0, 1, 0)
 maalt4dp <- subset(maalt4dp, mrun == 1)
-meanmaalt4dp <- by(data_ma_alt4$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt4dp <- by(data_ma_alt4$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt4), 100, nrow(data_ma_alt4)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 maalt4dp <- add_column(maalt4dp, meandp = meanmaalt4dp)
 maalt4dp_final <- maalt4dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -512,7 +513,7 @@ maalt5dp <- add_column(maalt5dp, samplesize = maalt5dp$AdultMaleTested + maalt5d
 maalt5dp <- add_column(maalt5dp, mrun = 1:1000)
 maalt5dp$mrun <- ifelse(maalt5dp$mrun %% 100 == 0, 1, 0)
 maalt5dp <- subset(maalt5dp, mrun == 1)
-meanmaalt5dp <- by(data_ma_alt5$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt5dp <- by(data_ma_alt5$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt5), 100, nrow(data_ma_alt5)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 maalt5dp <- add_column(maalt5dp, meandp = meanmaalt5dp)
 maalt5dp_final <- maalt5dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -529,7 +530,7 @@ maalt6dp <- add_column(maalt6dp, samplesize = maalt6dp$AdultMaleTested + maalt6d
 maalt6dp <- add_column(maalt6dp, mrun = 1:1000)
 maalt6dp$mrun <- ifelse(maalt6dp$mrun %% 100 == 0, 1, 0)
 maalt6dp <- subset(maalt6dp, mrun == 1)
-meanmaalt6dp <- by(data_ma_alt6$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt6dp <- by(data_ma_alt6$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt6), 100, nrow(data_ma_alt6)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 maalt6dp <- add_column(maalt6dp, meandp = meanmaalt6dp)
 maalt6dp_final <- maalt6dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -546,7 +547,7 @@ maalt7dp <- add_column(maalt7dp, samplesize = maalt7dp$AdultMaleTested + maalt7d
 maalt7dp <- add_column(maalt7dp, mrun = 1:1000)
 maalt7dp$mrun <- ifelse(maalt7dp$mrun %% 100 == 0, 1, 0)
 maalt7dp <- subset(maalt7dp, mrun == 1)
-meanmaalt7dp <- by(data_ma_alt7$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt7dp <- by(data_ma_alt7$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt7), 100, nrow(data_ma_alt7)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 maalt7dp <- add_column(maalt7dp, meandp = meanmaalt7dp)
 maalt7dp_final <- maalt7dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -563,7 +564,7 @@ maalt8dp <- add_column(maalt8dp, samplesize = maalt8dp$AdultMaleTested + maalt8d
 maalt8dp <- add_column(maalt8dp, mrun = 1:1000)
 maalt8dp$mrun <- ifelse(maalt8dp$mrun %% 100 == 0, 1, 0)
 maalt8dp <- subset(maalt8dp, mrun == 1)
-meanmaalt8dp <- by(data_ma_alt8$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt8dp <- by(data_ma_alt8$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt8), 100, nrow(data_ma_alt8)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 maalt8dp <- add_column(maalt8dp, meandp = meanmaalt8dp)
 maalt8dp_final <- maalt8dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -580,7 +581,7 @@ maalt9dp <- add_column(maalt9dp, samplesize = maalt9dp$AdultMaleTested + maalt9d
 maalt9dp <- add_column(maalt9dp, mrun = 1:1000)
 maalt9dp$mrun <- ifelse(maalt9dp$mrun %% 100 == 0, 1, 0)
 maalt9dp <- subset(maalt9dp, mrun == 1)
-meanmaalt9dp <- by(data_ma_alt9$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt9dp <- by(data_ma_alt9$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt9), 100, nrow(data_ma_alt9)))), 
                    FUN = function(x) colMeans(as.matrix(x)))
 maalt9dp <- add_column(maalt9dp, meandp = meanmaalt9dp)
 maalt9dp_final <- maalt9dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -597,7 +598,7 @@ maalt10dp <- add_column(maalt10dp, samplesize = maalt10dp$AdultMaleTested + maal
 maalt10dp <- add_column(maalt10dp, mrun = 1:1000)
 maalt10dp$mrun <- ifelse(maalt10dp$mrun %% 100 == 0, 1, 0)
 maalt10dp <- subset(maalt10dp, mrun == 1)
-meanmaalt10dp <- by(data_ma_alt10$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt10dp <- by(data_ma_alt10$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt10), 100, nrow(data_ma_alt10)))), 
                     FUN = function(x) colMeans(as.matrix(x)))
 maalt10dp <- add_column(maalt10dp, meandp = meanmaalt10dp)
 maalt10dp_final <- maalt10dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -614,7 +615,7 @@ maalt11dp <- add_column(maalt11dp, samplesize = maalt11dp$AdultMaleTested + maal
 maalt11dp <- add_column(maalt11dp, mrun = 1:1000)
 maalt11dp$mrun <- ifelse(maalt11dp$mrun %% 100 == 0, 1, 0)
 maalt11dp <- subset(maalt11dp, mrun == 1)
-meanmaalt11dp <- by(data_ma_alt11$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt11dp <- by(data_ma_alt11$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt11), 100, nrow(data_ma_alt11)))), 
                     FUN = function(x) colMeans(as.matrix(x)))
 maalt11dp <- add_column(maalt11dp, meandp = meanmaalt11dp)
 maalt11dp_final <- maalt11dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -631,7 +632,7 @@ maalt12dp <- add_column(maalt12dp, samplesize = maalt12dp$AdultMaleTested + maal
 maalt12dp <- add_column(maalt12dp, mrun = 1:1000)
 maalt12dp$mrun <- ifelse(maalt12dp$mrun %% 100 == 0, 1, 0)
 maalt12dp <- subset(maalt12dp, mrun == 1)
-meanmaalt12dp <- by(data_ma_alt12$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt12dp <- by(data_ma_alt12$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt12), 100, nrow(data_ma_alt12)))), 
                     FUN = function(x) colMeans(as.matrix(x)))
 maalt12dp <- add_column(maalt12dp, meandp = meanmaalt12dp)
 maalt12dp_final <- maalt12dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -648,7 +649,7 @@ maalt13dp <- add_column(maalt13dp, samplesize = maalt13dp$AdultMaleTested + maal
 maalt13dp <- add_column(maalt13dp, mrun = 1:1000)
 maalt13dp$mrun <- ifelse(maalt13dp$mrun %% 100 == 0, 1, 0)
 maalt13dp <- subset(maalt13dp, mrun == 1)
-meanmaalt13dp <- by(data_ma_alt13$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt13dp <- by(data_ma_alt13$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt13), 100, nrow(data_ma_alt13)))), 
                     FUN = function(x) colMeans(as.matrix(x)))
 maalt13dp <- add_column(maalt13dp, meandp = meanmaalt13dp)
 maalt13dp_final <- maalt13dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -665,7 +666,7 @@ maalt14dp <- add_column(maalt14dp, samplesize = maalt14dp$AdultMaleTested + maal
 maalt14dp <- add_column(maalt14dp, mrun = 1:1000)
 maalt14dp$mrun <- ifelse(maalt14dp$mrun %% 100 == 0, 1, 0)
 maalt14dp <- subset(maalt14dp, mrun == 1)
-meanmaalt14dp <- by(data_ma_alt14$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt14dp <- by(data_ma_alt14$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt14), 100, nrow(data_ma_alt14)))), 
                     FUN = function(x) colMeans(as.matrix(x)))
 maalt14dp <- add_column(maalt14dp, meandp = meanmaalt14dp)
 maalt14dp_final <- maalt14dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -682,7 +683,7 @@ maalt15dp <- add_column(maalt15dp, samplesize = maalt15dp$AdultMaleTested + maal
 maalt15dp <- add_column(maalt15dp, mrun = 1:1000)
 maalt15dp$mrun <- ifelse(maalt15dp$mrun %% 100 == 0, 1, 0)
 maalt15dp <- subset(maalt15dp, mrun == 1)
-meanmaalt15dp <- by(data_ma_alt15$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt15dp <- by(data_ma_alt15$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt15), 100, nrow(data_ma_alt15)))), 
                     FUN = function(x) colMeans(as.matrix(x)))
 maalt15dp <- add_column(maalt15dp, meandp = meanmaalt15dp)
 maalt15dp_final <- maalt15dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -699,7 +700,7 @@ maalt16dp <- add_column(maalt16dp, samplesize = maalt16dp$AdultMaleTested + maal
 maalt16dp <- add_column(maalt16dp, mrun = 1:1000)
 maalt16dp$mrun <- ifelse(maalt16dp$mrun %% 100 == 0, 1, 0)
 maalt16dp <- subset(maalt16dp, mrun == 1)
-meanmaalt16dp <- by(data_ma_alt16$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt16dp <- by(data_ma_alt16$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt16), 100, nrow(data_ma_alt16)))), 
                     FUN = function(x) colMeans(as.matrix(x)))
 maalt16dp <- add_column(maalt16dp, meandp = meanmaalt16dp)
 maalt16dp_final <- maalt16dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -716,7 +717,7 @@ maalt17dp <- add_column(maalt17dp, samplesize = maalt17dp$AdultMaleTested + maal
 maalt17dp <- add_column(maalt17dp, mrun = 1:1000)
 maalt17dp$mrun <- ifelse(maalt17dp$mrun %% 100 == 0, 1, 0)
 maalt17dp <- subset(maalt17dp, mrun == 1)
-meanmaalt17dp <- by(data_ma_alt17$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt17dp <- by(data_ma_alt17$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt17), 100, nrow(data_ma_alt17)))), 
                     FUN = function(x) colMeans(as.matrix(x)))
 maalt17dp <- add_column(maalt17dp, meandp = meanmaalt17dp)
 maalt17dp_final <- maalt17dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -733,7 +734,7 @@ maalt18dp <- add_column(maalt18dp, samplesize = maalt18dp$AdultMaleTested + maal
 maalt18dp <- add_column(maalt18dp, mrun = 1:1000)
 maalt18dp$mrun <- ifelse(maalt18dp$mrun %% 100 == 0, 1, 0)
 maalt18dp <- subset(maalt18dp, mrun == 1)
-meanmaalt18dp <- by(data_ma_alt18$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt18dp <- by(data_ma_alt18$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt18), 100, nrow(data_ma_alt18)))), 
                     FUN = function(x) colMeans(as.matrix(x)))
 maalt18dp <- add_column(maalt18dp, meandp = meanmaalt18dp)
 maalt18dp_final <- maalt18dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -750,7 +751,7 @@ maalt19dp <- add_column(maalt19dp, samplesize = maalt19dp$AdultMaleTested + maal
 maalt19dp <- add_column(maalt19dp, mrun = 1:1000)
 maalt19dp$mrun <- ifelse(maalt19dp$mrun %% 100 == 0, 1, 0)
 maalt19dp <- subset(maalt19dp, mrun == 1)
-meanmaalt19dp <- by(data_ma_alt19$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt19dp <- by(data_ma_alt19$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt19), 100, nrow(data_ma_alt19)))), 
                     FUN = function(x) colMeans(as.matrix(x)))
 maalt19dp <- add_column(maalt19dp, meandp = meanmaalt19dp)
 maalt19dp_final <- maalt19dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -767,7 +768,7 @@ maalt20dp <- add_column(maalt20dp, samplesize = maalt20dp$AdultMaleTested + maal
 maalt20dp <- add_column(maalt20dp, mrun = 1:1000)
 maalt20dp$mrun <- ifelse(maalt20dp$mrun %% 100 == 0, 1, 0)
 maalt20dp <- subset(maalt20dp, mrun == 1)
-meanmaalt20dp <- by(data_ma_alt20$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt20dp <- by(data_ma_alt20$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt20), 100, nrow(data_ma_alt20)))), 
                     FUN = function(x) colMeans(as.matrix(x)))
 maalt20dp <- add_column(maalt20dp, meandp = meanmaalt20dp)
 maalt20dp_final <- maalt20dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -784,7 +785,7 @@ maalt21dp <- add_column(maalt21dp, samplesize = maalt21dp$AdultMaleTested + maal
 maalt21dp <- add_column(maalt21dp, mrun = 1:1000)
 maalt21dp$mrun <- ifelse(maalt21dp$mrun %% 100 == 0, 1, 0)
 maalt21dp <- subset(maalt21dp, mrun == 1)
-meanmaalt21dp <- by(data_ma_alt21$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt21dp <- by(data_ma_alt21$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt21), 100, nrow(data_ma_alt21)))), 
                     FUN = function(x) colMeans(as.matrix(x)))
 maalt21dp <- add_column(maalt21dp, meandp = meanmaalt21dp)
 maalt21dp_final <- maalt21dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -801,7 +802,7 @@ maalt22dp <- add_column(maalt22dp, samplesize = maalt22dp$AdultMaleTested + maal
 maalt22dp <- add_column(maalt22dp, mrun = 1:1000)
 maalt22dp$mrun <- ifelse(maalt22dp$mrun %% 100 == 0, 1, 0)
 maalt22dp <- subset(maalt22dp, mrun == 1)
-meanmaalt22dp <- by(data_ma_alt22$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt22dp <- by(data_ma_alt22$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt22), 100, nrow(data_ma_alt22)))), 
                     FUN = function(x) colMeans(as.matrix(x)))
 maalt22dp <- add_column(maalt22dp, meandp = meanmaalt22dp)
 maalt22dp_final <- maalt22dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -818,7 +819,7 @@ maalt23dp <- add_column(maalt23dp, samplesize = maalt23dp$AdultMaleTested + maal
 maalt23dp <- add_column(maalt23dp, mrun = 1:1000)
 maalt23dp$mrun <- ifelse(maalt23dp$mrun %% 100 == 0, 1, 0)
 maalt23dp <- subset(maalt23dp, mrun == 1)
-meanmaalt23dp <- by(data_ma_alt23$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt23dp <- by(data_ma_alt23$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt23), 100, nrow(data_ma_alt23)))), 
                     FUN = function(x) colMeans(as.matrix(x)))
 maalt23dp <- add_column(maalt23dp, meandp = meanmaalt23dp)
 maalt23dp_final <- maalt23dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -835,7 +836,7 @@ maalt24dp <- add_column(maalt24dp, samplesize = maalt24dp$AdultMaleTested + maal
 maalt24dp <- add_column(maalt24dp, mrun = 1:1000)
 maalt24dp$mrun <- ifelse(maalt24dp$mrun %% 100 == 0, 1, 0)
 maalt24dp <- subset(maalt24dp, mrun == 1)
-meanmaalt24dp <- by(data_ma_alt24$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt24dp <- by(data_ma_alt24$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt24), 100, nrow(data_ma_alt24)))), 
                     FUN = function(x) colMeans(as.matrix(x)))
 maalt24dp <- add_column(maalt24dp, meandp = meanmaalt24dp)
 maalt24dp_final <- maalt24dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
@@ -852,7 +853,7 @@ maalt25dp <- add_column(maalt25dp, samplesize = maalt25dp$AdultMaleTested + maal
 maalt25dp <- add_column(maalt25dp, mrun = 1:1000)
 maalt25dp$mrun <- ifelse(maalt25dp$mrun %% 100 == 0, 1, 0)
 maalt25dp <- subset(maalt25dp, mrun == 1)
-meanmaalt25dp <- by(data_ma_alt25$DetProb, list(gr=as.numeric(gl(nrow(data), 100, nrow(data)))), 
+meanmaalt25dp <- by(data_ma_alt25$DetProb, list(gr=as.numeric(gl(nrow(data_ma_alt25), 100, nrow(data_ma_alt25)))), 
                     FUN = function(x) colMeans(as.matrix(x)))
 maalt25dp <- add_column(maalt25dp, meandp = meanmaalt25dp)
 maalt25dp_final <- maalt25dp %>% select(scenario, TotalCWD, samplesize, meandp) #dplyr
