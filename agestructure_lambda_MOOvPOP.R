@@ -1,8 +1,9 @@
-#setwd ("C:/Users/belsare1/OneDrive/Documents/Research_AVB/Postdoc_MU/CWD/CWD_MS_Oct2016/Data for plots and analysis/use in MS/Final_MS/CWD MS June18/ABelsare_22June19")
 require (dplyr)
 require (ggplot2)
 require (tidyverse)
 require(tidyr)
+require (tibble)
+
 data <- read.csv("deerpopdyFranklinCounty_5iterations.csv", header = TRUE)
 data = data[-1,]
 as_tibble(data)                                                # deletes the very 1st row, which is the user provided information for setup
