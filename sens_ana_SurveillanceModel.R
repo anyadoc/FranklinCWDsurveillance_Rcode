@@ -6,6 +6,7 @@ require(grid)
 require(ggpubr)
 library(matrixStats)
 require(dplyr)
+require (tibble)
 
 data_sa_bl <- read.csv("CWDsurveillanceMO_bl1000.csv", header = TRUE) #sen.analysis baseline scenario
 as_tibble(data_sa_bl)
